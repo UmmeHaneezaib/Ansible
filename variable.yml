@@ -1,0 +1,17 @@
+---
+- name: To check the working of variables
+  hosts: all
+  become: yes
+  vars:
+   package: apache2
+   user_allowed: true
+   
+  tasks:
+   - name: we are uninstalling "{{package}}"
+     apt:
+      name: "{{package}}"
+      state: absent
+   - name: Should not be present
+     service:
+      name: apache2
+      state: stopped

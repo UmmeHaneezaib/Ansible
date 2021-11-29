@@ -1,0 +1,14 @@
+---
+- name: learn loop inside playbook
+  hosts: all
+  become: yes
+  tasks:
+   - name: Add Several users on node
+     ansible.builtin.user:
+      name: "{{ item }}"
+      state: present
+     loop:
+      - han
+      - zaib
+      - riz
+      
