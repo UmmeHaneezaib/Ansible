@@ -1,0 +1,24 @@
+---
+- name: learning handler concept
+  hosts: all
+  become: yes
+  tasks:
+   - name: Install apache httpd
+     apt:
+      name: apache2
+      state: present
+      
+   - name: display apache configs
+     shell: 
+      cmd: ls -la 
+      
+   - name: now install and config done
+     shell: ls -la
+     notify:  
+      - restart apache again
+      
+  handlers:
+    - name: restart apache again
+      service:
+        name: apache2
+        state: restarted
